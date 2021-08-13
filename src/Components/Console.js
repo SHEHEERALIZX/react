@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import db from "./config";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function Console() {
   const [name, setName] = useState("");
@@ -28,7 +30,9 @@ function Console() {
     setName(e.target.value);
   };
   if (loading){
-      return <h1>Loading</h1>
+    <div className="spinner-border" role="status">
+  <span className="sr-only">Loading...</span>
+</div>
   }
 
   return (
