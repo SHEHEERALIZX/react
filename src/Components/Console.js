@@ -1,78 +1,102 @@
-import React, { useState, useEffect } from "react";
-import db from "./config";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import React, { useState, useEffect } from "react";
+// import db from "./config";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-function Console() {
-  const [name, setName] = useState("");
-  const [firestoredata, setFirestoredata] = useState([]);
-    const [loading,setLoading] = useState(false)
+// function Console() {
+//   const [name, setName] = useState("");
+//   const [firestoredata, setFirestoredata] = useState([] );
+//     const [loading,setLoading] = useState(false)
+//     const [key,setKey] = useState([])
 
-//   const ref = db.collections("students");
+// //   const ref = db.collections("students");
 
-  function getdata() {
-      setLoading(true)
-      db.collection("students").onSnapshot((querysnapshot)=>{
-          const lists = [] ;
-          querysnapshot.forEach((obj)=>{
-              lists.push(obj.data());
-          });
-          setFirestoredata(lists);
-          setLoading(false);
-      })
-  }
+//   function getdata() {
+//       setLoading(true)
+//       db.collection("students").onSnapshot((querysnapshot)=>{
+//           const lists = [] ;
+//           const keys =[];
+//           querysnapshot.forEach((obj)=>{
+//             //   lists.push(obj.data()); 
+//             //   keys.push(obj.id)
+//             setFirestoredata([
+//                 ...firestoredata,{data:obj.data(),id:obj.id}
+//             ]);
+              
+//           });
+     
+//           setKey(keys)
+//           setLoading(false);
+//       })
+//   }
 
-  useEffect(()=>{
-      getdata();
-  },[])
+//       db.collection("students").doc("mFhM9Evr6yuKFuIX1byT").delete()
 
-  const handleSubmit = (e) => {
-    setName(e.target.value);
-  };
-  if (loading){
-    <div className="spinner-border" role="status">
-  <span className="sr-only">Loading...</span>
-</div>
-  }
+//   useEffect(()=>{
+//       getdata();
+//   },[])
 
-  return (
-    <div>
-      <input value={name} onChange={handleSubmit} type="text" name="" id="" />
+//   const handleSubmit = (e) => {
+//     setName(e.target.value);
+//   };
+//   if (loading){
+//       return(
+//           <div className="container">
+//           <div className="container-fluid">
 
-      <input
-        onClick={() => {
-          db.collection("students")
-            .get()
-            .then((snapshot) => {
-              snapshot.forEach((obj) => {
-                console.log(obj.data());
-              });
-            });
-        }}
-        type="button"
-        value="Console Data"
-      />
+//           <div className="spinner-border text-primary" role="status">
+//           <span className="sr-only">Loading...</span>
+//         </div>
+//           </div>
+//           </div>
+      
+//       )
 
-      <input
-        onClick={() => {
-          db.collection("students").add({ name: name });
-          setName("");
+//   }
 
-          console.log("Done");
-        }}
-        type="button"
-        value="Add to List"
-      />
+//   return (
+//     <div>
+//       <input value={name} onChange={handleSubmit} type="text" name="" id="" />
 
-      {
-          firestoredata.map((obj,k)=>{
-              return(
-                  <ul><li>{obj.name}</li></ul>
-              )
-          })
-      }
-    </div>
-  );
-}
+//       <input
+//         onClick={() => {
+//           db.collection("students")
+//             .get()
+//             .then((snapshot) => {
+//               snapshot.forEach((obj) => {
+//                 console.log(obj.data());
+//               });
+//             });
+//         }}
+//         type="button"
+//         value="Console Data"
+//       />
 
-export default Console;
+//       <input
+//         onClick={() => {
+//           db.collection("students").add({ name: name });
+//           setName("");
+
+//           console.log("Done");
+//         }}
+//         type="button"
+//         value="Add to List"
+//       />
+
+//       {
+//           firestoredata.map((obj,k)=>{
+//               return(
+//                   <ul><li>{obj.name} 
+//                   {obj.id}
+              
+//                   </li>
+//                   <input type="button" value="Delete" />
+//                   </ul>
+//               )
+//           })
+//       }
+//     </div>
+//   );
+// }
+
+// export default Console;
